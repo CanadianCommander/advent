@@ -4,6 +4,9 @@
   "scripts": {
     "2022:day": "ts-node src/2022/$0/main.ts"
   },
+  "engines": {
+    "node": ">=20.0.0"
+  },
   "dependencies": {
     "commander": "^11.1.0",
     "ts-node": "^10.9.1",
