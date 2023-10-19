@@ -1,0 +1,15 @@
+{
+  "compilerOptions": {
+    "moduleResolution": "NodeNext",
+    "lib": [
+      "DOM",
+      "es2022",
+    ],
+    "module": "NodeNext",
+    "target": "ES2022",
+    "esModuleInterop": true,
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+}
