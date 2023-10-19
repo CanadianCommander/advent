@@ -2,4 +2,4 @@
 
 Because why not! 🚀🚀🚀🚀
 
-Written for fun, yes the code is messy.
+Written for fun! Codes a bit messy.
