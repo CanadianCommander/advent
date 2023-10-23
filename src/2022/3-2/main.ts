@@ -12,7 +12,7 @@ class Sack {
 // =================================================
 // =================================================
 
-const fileRaw = fs.readFileSync("./src/2022/3/input.txt", "utf-8");
+const fileRaw = fs.readFileSync("./src/2022/3-1/input.txt", "utf-8");
 
 const sacksRaw = fileRaw.trim().split("\n");
 

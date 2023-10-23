@@ -1,6 +1,6 @@
 import * as fs from "fs";
 
-const fileRaw = fs.readFileSync("./src/2022/1/input.txt", "utf-8");
+const fileRaw = fs.readFileSync("./src/2022/1-1/input.txt", "utf-8");
 
 let calElf = fileRaw.trim().split("\n\n");
 

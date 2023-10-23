@@ -73,7 +73,7 @@ const scoreOutcombMap = {
 // ======================================================
 // ======================================================
 
-const fileRaw = fs.readFileSync("./src/2022/2/input.txt", "utf-8");
+const fileRaw = fs.readFileSync("./src/2022/2-1/input.txt", "utf-8");
 
 const roundsRaw = fileRaw.trim().split("\n");
 
