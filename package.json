@@ -2,7 +2,7 @@
   "name": "advent",
   "packageManager": "yarn@3.6.4",
   "scripts": {
-    "2022:day": "ts-node src/2022/$0/main.ts"
+    "2022:day": "./run-day.sh 2022 $0"
   },
   "engines": {
     "node": ">=20.0.0"
