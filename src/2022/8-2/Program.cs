@@ -1,7 +1,7 @@
 ﻿
 using System.Text.Json;
 
-var inputLines = File.ReadAllLines("input.txt");
+var inputLines = File.ReadAllLines("../8-1/input.txt");
 
 
 var start = DateTime.Now;
@@ -9,7 +9,7 @@ var start = DateTime.Now;
 var bottomRight = InputParser.ParseInputGrid(inputLines);
 
 
-Console.WriteLine($"{TreeVisibility.CountVisible(bottomRight.GetLeftMost().GetTopMost())} Trees are visible form the outside of the grid");
+Console.WriteLine($"{SceneryJudge.GetMaxSceneryScore(bottomRight.GetLeftMost().GetTopMost())} Is the max scenery score");
 
 var end = DateTime.Now;
 
@@ -17,21 +17,22 @@ Console.WriteLine($"Time taken: {(end - start).TotalMilliseconds}ms");
 
 // ==========================================
 
-class TreeVisibility
+class SceneryJudge
 {
-  public static int CountVisible(Tree topLeft)
+  public static int GetMaxSceneryScore(Tree topLeft)
   {
     var currentTree = topLeft;
     var last = currentTree;
-    var visCount = 0;
+    var maxScore = 0;
 
     while (currentTree != null)
     {
       while (currentTree != null)
       {
-        if (currentTree.Visible())
+        var score = currentTree.SceneryScore();
+        if (score > maxScore)
         {
-          visCount++;
+          maxScore = score;
         }
 
         last = currentTree;
@@ -40,7 +41,7 @@ class TreeVisibility
       currentTree = last.GetLeftMost().Bottom;
     }
 
-    return visCount;
+    return maxScore;
   }
 }
 
@@ -121,12 +122,12 @@ class Tree
   /// <summary>
   /// Is this Tree visible 
   /// </summary>
-  public bool Visible()
+  public int SceneryScore()
   {
-    return !this.TallerThanLeft(this._height) ||
-     !this.TallerThanRight(this._height) ||
-     !this.TallerThanTop(this._height) ||
-     !this.TallerThanBottom(this._height);
+    return this.VisLeft(this.Height) *
+      this.VisRight(this.Height) *
+      this.VisTop(this.Height) *
+      this.VisBottom(this.Height);
   }
 
   /// <summary>
@@ -134,70 +135,69 @@ class Tree
   /// </summary>
   /// <param name="height"></param>
   /// <returns></returns>
-  public bool TallerThanLeft(int height)
+  public int VisLeft(int height, int sum = 0)
   {
-    if (this._left != null)
+    if (this._left == null)
     {
-      if (this._left.Height >= height)
-      {
-        return true;
-      }
-      else
-      {
-        return this._left.TallerThanLeft(height);
-      }
+      return sum;
     }
-    return false;
+    else if (this._left.Height >= height)
+    {
+      return sum + 1;
+    }
+    else
+    {
+      return this._left.VisLeft(height, sum + 1);
+    }
   }
 
-  public bool TallerThanRight(int height)
+  public int VisRight(int height, int sum = 0)
   {
-    if (this._right != null)
+    if (this._right == null)
     {
-      if (this._right.Height >= height)
-      {
-        return true;
-      }
-      else
-      {
-        return this._right.TallerThanRight(height);
-      }
+      return sum;
     }
-    return false;
+    else if (this._right.Height >= height)
+    {
+      return sum + 1;
+    }
+    else
+    {
+      return this._right.VisRight(height, sum + 1);
+    }
   }
 
-  public bool TallerThanTop(int height)
+  public int VisTop(int height, int sum = 0)
   {
-    if (this._top != null)
+    if (this._top == null)
     {
-      if (this._top.Height >= height)
-      {
-        return true;
-      }
-      else
-      {
-        return this._top.TallerThanTop(height);
-      }
+      return sum;
     }
-    return false;
+    else if (this._top.Height >= height)
+    {
+      return sum + 1;
+    }
+    else
+    {
+      return this._top.VisTop(height, sum + 1);
+    }
   }
 
-  public bool TallerThanBottom(int height)
+  public int VisBottom(int height, int sum = 0)
   {
-    if (this._bottom != null)
+    if (this._bottom == null)
     {
-      if (this._bottom.Height >= height)
-      {
-        return true;
-      }
-      else
-      {
-        return this._bottom.TallerThanBottom(height);
-      }
+      return sum;
     }
-    return false;
+    else if (this._bottom.Height >= height)
+    {
+      return sum + 1;
+    }
+    else
+    {
+      return this._bottom.VisBottom(height, sum + 1);
+    }
   }
-
 
   /// <summary>
   /// <c>GetLeftMost</c> Gets the left most tree in that can be found from this tree 
