@@ -5,6 +5,7 @@ Because why not! 🚀🎄
 #### Prerequisites 
 - [Yarn 2](https://yarnpkg.com/)
 - [Node 18+](https://nodejs.org/en)
+- [dotnet core 7+](https://dotnet.microsoft.com/en-us/download)
   
 #### Getting Started 
 Running this project couldn't be easier!
