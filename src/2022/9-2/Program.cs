@@ -3,7 +3,7 @@ using System.Linq;
 using System.Text.RegularExpressions;
 
 
-var lines = File.ReadAllLines("./input-test.txt");
+var lines = File.ReadAllLines("../9-1/input.txt");
 var movements = new List<Movement>();
 
 foreach (var line in lines)
@@ -97,8 +97,12 @@ public class Mover
   public static (int, int) MoveTail((int, int) tailPos, (int, int) headPos, (int, int) lastHeadPos)
   {
     var distanceVecHead = headPos.Sub(tailPos);
-
-    if (Math.Abs(distanceVecHead.Item1) > 1)
+    if (Math.Abs(distanceVecHead.Item1) >= 1 && Math.Abs(distanceVecHead.Item2) >= 1 && (Math.Abs(distanceVecHead.Item1) > 1 || Math.Abs(distanceVecHead.Item2) > 1))
+    {
+      // move XY
+      return tailPos.Add((distanceVecHead.Item1 / Math.Abs(distanceVecHead.Item1), (distanceVecHead.Item2 / Math.Abs(distanceVecHead.Item2))));
+    }
+    else if (Math.Abs(distanceVecHead.Item1) > 1)
     {
       // move X 
       return tailPos.Add((distanceVecHead.Item1 / Math.Abs(distanceVecHead.Item1), 0));
